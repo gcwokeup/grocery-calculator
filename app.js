@@ -1,5 +1,5 @@
 var resetValues = function(){
-  $(".form").trigger("reset");
+  $("form").trigger("reset");
 }
 
 
@@ -34,22 +34,27 @@ var changeValue = function(selector,newValue){
 }
 
 var addToList = function(){
-  $("#submit").click(function(e){
+  $("form").submit(function(e){
     e.preventDefault();
-    var productName = $('.form input[name="produce-name"]').val();
-    var productPrice = parseFloat($('.form input[name="produce-price"]').val());
-    var productWeight = parseFloat($('.form input[name="produce-weight"]').val());
+    //defining some vars
+    var productName = $('input[name="produce-name"]').val();
+    var productPrice = parseFloat($('input[name="produce-price"]').val());
+    var productWeight = parseFloat($('input[name="produce-weight"]').val());
     var productCost  = itemCost(productWeight, productPrice);
+    //makes sure the inputs are valid floats
     if(!productPrice || !productWeight){
       alert("yo homie, I need numbers for price and weight")
       return;
     }
+    //updating table
     $(".groceryList").append("<tr class='listItem'><td>" + 
       productName + "</td><td>" + 
       productPrice +  "</td><td>" + 
       productWeight + "</td><td>" + 
       productCost + "</td></tr>");
+    //resetting form
     resetValues();
+    // updating second table
     changeValue("#totalPrice", totalPrice(productCost))
 
   });
