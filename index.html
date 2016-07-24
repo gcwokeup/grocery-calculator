@@ -4,7 +4,7 @@
   <title>Grocery</title>
 </head>
 <body>
-  <header>Grocery List</header>
+  <header>Add Item:</header>
   <form class="form">
     Produce Name:<br>
     <input type="text" name="produce-name"><br>
@@ -14,7 +14,17 @@
     <input type="text" name="produce-weight"><br>
     <input id="submit" type="button" name="submit" value="Submit">
   </form>
-  <div class="Total"></div>
+
+  <div class="total">
+    <h3>Grocery List</h3>
+   
+    <table border="1">
+    <tr>
+      <td>Name</td><td>Price</td><td>Weight</td>
+    </tr>
+    </table>
+  </div>
+
   <link rel="stylesheet" href="stylesheet.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="app.js"></script>
