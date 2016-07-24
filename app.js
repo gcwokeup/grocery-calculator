@@ -2,10 +2,6 @@ var resetValues = function(){
   $(".form").trigger("reset");
 }
 
-var itemCost = function(addItemForm){
-  var cost = addItemForm[1].value * addItemForm[2].value;
-  return cost;
-}
 
 Number.prototype.formatMoney = function(c, d, t){
 var n = this, 
@@ -18,20 +14,21 @@ var n = this,
    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
  };
 
-var totalPrice = function(newValue){
-  var oldTotal = $(".totalPrice").text();
-  var oldVal = parseFloat(oldTotal).toFixed(2);
-  var newVal = parseFloat(newValue).toFixed(2);
-  var total = (parseFloat(newValue) + parseFloat(oldTotal));
-  return "$" + total.formatMoney(2);
+var itemCost = function(weight, price){
+  var cost = weight * price;
+  return cost;
 }
-// var totalPrice = function(newValue){
-//   costsArray.push(newValue)
-//   function getSum(total, num) {
-//     return total + num;
-//   return costsArray.reduce(getsum);
-//   }
-// }
+
+var currentTotal = function(){
+  var total = parseFloat($('#totalPrice').text().replace("$",""));
+  return total == 0 ? 1.00 : total;
+}
+
+var totalPrice = function(newValue){
+  var newTotal = currentTotal() * newValue;
+  return "$" + newTotal;
+}
+
 var changeValue = function(selector,newValue){
   $(selector).text(newValue)
 }
@@ -39,11 +36,21 @@ var changeValue = function(selector,newValue){
 var addToList = function(){
   $("#submit").click(function(e){
     e.preventDefault();
-    var addItemForm = $(".form").serializeArray();
-    $(".groceryList").append("<tr class='listItem'><td>" + addItemForm[0].value + "</td><td>" + addItemForm[1].value +  "</td><td>" + addItemForm[2].value + "</td><td>" + itemCost(addItemForm) + "</td></tr>");
+    var productName = $('.form input[name="produce-name"]').val();
+    var productPrice = parseFloat($('.form input[name="produce-price"]').val());
+    var productWeight = parseFloat($('.form input[name="produce-weight"]').val());
+    var productCost  = itemCost(productWeight, productPrice);
+    if(!productPrice || !productWeight){
+      alert("yo homie, I need numbers for price and weight")
+      return;
+    }
+    $(".groceryList").append("<tr class='listItem'><td>" + 
+      productName + "</td><td>" + 
+      productPrice +  "</td><td>" + 
+      productWeight + "</td><td>" + 
+      productCost + "</td></tr>");
     resetValues();
-    console.log(totalPrice(itemCost(addItemForm)));
-    changeValue(".totalPrice", totalPrice(itemCost(addItemForm)))
+    changeValue("#totalPrice", totalPrice(productCost))
 
   });
 

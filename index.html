@@ -9,9 +9,9 @@
     Produce Name:<br>
     <input type="text" name="produce-name"><br>
     Produce Price:<br>
-    <input type="text" name="produce-price"><br>
+    <input type="number" name="produce-price"><br>
     Produce Weight:<br>
-    <input type="text" name="produce-weight"><br>
+    <input type="number" name="produce-weight"><br>
     <input id="submit" type="button" name="submit" value="Submit">
   </form>
 
@@ -23,7 +23,7 @@
       <td>Name</td><td>Price($/lb)</td><td>Weight(lb)</td><td>Cost</td>
     </tr>
     </table>
-    <table class="total" border="1"><tr><td>Total Price($):</td><td class="totalPrice">0</td></tr></table>
+    <table class="total" border="1"><tr><td>Total Price($):</td><td id="totalPrice">0</td></tr></table>
   </div>
 
   <link rel="stylesheet" href="stylesheet.css" />
