@@ -4,7 +4,7 @@
   <title>Grocery</title>
 </head>
 <body>
-  <header>Add Item:</header>
+  <h3>Add Item:</h3>
   <form class="form">
     Produce Name:<br>
     <input type="text" name="produce-name"><br>
@@ -18,11 +18,12 @@
   <div class="total">
     <h3>Grocery List</h3>
    
-    <table border="1">
+    <table class="groceryList" border="1">
     <tr>
-      <td>Name</td><td>Price</td><td>Weight</td>
+      <td>Name</td><td>Price($/lb)</td><td>Weight(lb)</td><td>Cost</td>
     </tr>
     </table>
+    <table class="total" border="1"><tr><td>Total Price:</td><td>$O</td></tr></table>
   </div>
 
   <link rel="stylesheet" href="stylesheet.css" />
